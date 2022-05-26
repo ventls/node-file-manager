@@ -17,6 +17,12 @@
     .sortable {
       cursor: pointer;
     }
+    .glyphicon-folder-open{
+      color : #ffd849;
+    }
+    .glyphicon-file{
+      color: #ccc
+    }
   </style>
 </head>
 
@@ -145,15 +151,21 @@
           <th>Name</th>
           <th>Size</th>
           <th>Time</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
-      <tr class="sortable" ng-repeat="file in FM.curFiles | orderBy:'folder'">
+      <tr class="sortable" ng-repeat="file in FM.curFiles | orderBy:'!folder'">
         <td><input type="checkbox" value="{{file.name}}" ng-model="file.selected"></td>
-        <td ng-click="FM.clickFile(file)"><span class="{{file.folder ? 'glyphicon glyphicon-folder-open' : 'glyphicon glyphicon-file'}}"></span></td>
-        <td ng-click="FM.clickFile(file)"><a>{{file.name}}</a></td>
+        <td ng-click="FM.showFile(file)">
+          <span class="{{file.folder ? 'glyphicon glyphicon-folder-open' : 'glyphicon glyphicon-file'}}">
+
+          </span>
+        </td>
+        <td ng-click="FM.showFile(file)"><a>{{file.name}}</a></td>
         <td>{{file.humanSize}}</td>
         <td>{{file.humanTime}}</td>
+        <td ng-click="FM.clickFile(file)"><a>{{file.folder ? "" : "下载"}}</a></td>
       </tr>
       </tbody>
     </table>
